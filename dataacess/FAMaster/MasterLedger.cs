@@ -982,6 +982,34 @@ new SqlParameter("@gstno",SqlDbType.VarChar,40)};
         // Vino New for OPBal Breakup End [09-04-2024]
 
 
+        public void InsLedgerDetailsNew(int ledgerid, int divisionid, int branchid, char pbtype, char opbtype, double pbamt, double opbamt, string dbname, double opusdbamt, string fcurr)
+        {
+            SqlParameter[] objp = new SqlParameter[] { new SqlParameter("@ledgerid", SqlDbType.Int, 4),
+                                                new SqlParameter("@divisionid", SqlDbType.Int, 4),
+                                                new SqlParameter("@branchid", SqlDbType.Int, 4),
+                                               new SqlParameter("@pbtype", SqlDbType.Char, 1),
+                                                new SqlParameter("@opbtype", SqlDbType.Char, 1),
+                                                 new SqlParameter("@pbamt", SqlDbType.Money, 8),
+                                                new SqlParameter("@opbamt", SqlDbType.Money, 8),
+                                                new SqlParameter("@dbname",SqlDbType.VarChar,15),
+                                                new SqlParameter("@opusdbamt", SqlDbType.Money, 8),
+                                                new SqlParameter("@fcurr", SqlDbType.VarChar,5)
+                                                };
+            objp[0].Value = ledgerid;
+            objp[1].Value = divisionid;
+            objp[2].Value = branchid;
+            objp[3].Value = pbtype;
+            objp[4].Value = opbtype;
+            objp[5].Value = pbamt;
+            objp[6].Value = opbamt;
+            objp[7].Value = dbname;
+            objp[8].Value = opusdbamt;
+            objp[9].Value = fcurr;
+
+            ExecuteQuery("SPInsFALedgerDetailsNew", objp);
+        }
+
+
     }
 
 

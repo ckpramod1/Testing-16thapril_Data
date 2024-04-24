@@ -197,6 +197,7 @@ namespace DataAccess.Masters
         }
         public int GetCustomerid(string customername, string location)
         {
+            Portobj.GetDataBase(Clientcode);
             int cityid = Portobj.GetNPortid(location);
             SqlParameter[] objp = new SqlParameter[] {new SqlParameter("@customername",SqlDbType.VarChar,100),
                                                                                      new SqlParameter("@city",SqlDbType.Int)};
@@ -6809,6 +6810,19 @@ new SqlParameter("@product", SqlDbType.VarChar,20)
             objp[0].Value = pano;
             objp[1].Value = zip;
             return ExecuteTable("SP_checkCustomerpin", objp);
+        }
+
+        public DataTable GetcheckLedgeridOBNew(string customername, string portname)
+        {
+            SqlParameter[] array = new SqlParameter[2]
+            {
+        new SqlParameter("@customername", SqlDbType.VarChar, 200),
+        new SqlParameter("@portname", SqlDbType.VarChar, 200)
+            };
+            array[0].Value = customername;
+            array[1].Value = portname;
+            IDataParameter[] parameters = array;
+            return ExecuteTable("Sp_CustLedgidNew", parameters);
         }
 
 

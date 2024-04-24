@@ -21,42 +21,45 @@ namespace DataAccess
         {
             Conn = new SqlConnection(DBCS);
         }
-        public int  InsBuyingHead(int intLiner, int intCargo, int intPOL, int intPOD, char freight, DateTime validtill, char shipment, char dgcargo, char bulkvolume, double brokerage, int intObtainby, int intPrepareby, string remarks,int intPor,int intFD)
+        public int InsBuyingHead(int intLiner, int intCargo, int intPOL, int intPOD, char freight, DateTime validtill, char shipment, char dgcargo, char bulkvolume, double brokerage, int intObtainby, int intPrepareby, string remarks, int intPor, int intFD)
         {
-            SqlParameter[] objp = new SqlParameter[] { new SqlParameter("@liner", SqlDbType.Int, 4),
-                                                       new SqlParameter("@cargo", SqlDbType.Int),
-                                                       new SqlParameter("@pol", SqlDbType.Int, 4),
-                                                       new SqlParameter("@pod", SqlDbType.Int, 4),
-                                                       new SqlParameter("@freight", SqlDbType.Char, 1),
-                                                       new SqlParameter("@validity", SqlDbType.SmallDateTime, 4),
-                                                       new SqlParameter("@shipment", SqlDbType.Char, 1),
-                                                       new SqlParameter("@dgcargo", SqlDbType.Char, 1),
-                                                       new SqlParameter("@bulkvolume", SqlDbType.Char, 1),
-                                                       new SqlParameter("@brokerage", SqlDbType.Real, 4),
-                                                       new SqlParameter("@obtainedby", SqlDbType.Int, 4),
-                                                       new SqlParameter("@preparedby", SqlDbType.Int, 4),
-                                                       new SqlParameter("@remarks", SqlDbType.VarChar, 100),
-                                                       new SqlParameter("@por",SqlDbType.Int,4),
-                                                       new SqlParameter("@fd",SqlDbType.Int,4),
-                                                       new SqlParameter("@rateid",SqlDbType.Int,4),};
-            objp[0].Value = intLiner;
-            objp[1].Value = intCargo;
-            objp[2].Value = intPOL;
-            objp[3].Value = intPOD;
-            objp[4].Value = freight;
-            objp[5].Value = validtill;
-            objp[6].Value = shipment;
-            objp[7].Value = dgcargo;
-            objp[8].Value = bulkvolume;
-            objp[9].Value = brokerage;
-            objp[10].Value = intObtainby;
-            objp[11].Value = intPrepareby;
-            objp[12].Value = remarks;
-            objp[13].Value = intPor;
-            objp[14].Value = intFD;
-            objp[15].Direction = ParameterDirection.Output;
-            return ExecuteQuery("SPInsBuyingHead", objp,"@rateid");
-            
+            SqlParameter[] array = new SqlParameter[16]
+            {
+            new SqlParameter("@liner", SqlDbType.Int, 4),
+            new SqlParameter("@cargo", SqlDbType.SmallInt, 2),
+            new SqlParameter("@pol", SqlDbType.Int, 4),
+            new SqlParameter("@pod", SqlDbType.Int, 4),
+            new SqlParameter("@freight", SqlDbType.Char, 1),
+            new SqlParameter("@validity", SqlDbType.SmallDateTime, 4),
+            new SqlParameter("@shipment", SqlDbType.Char, 1),
+            new SqlParameter("@dgcargo", SqlDbType.Char, 1),
+            new SqlParameter("@bulkvolume", SqlDbType.Char, 1),
+            new SqlParameter("@brokerage", SqlDbType.Real, 4),
+            new SqlParameter("@obtainedby", SqlDbType.Int, 4),
+            new SqlParameter("@preparedby", SqlDbType.Int, 4),
+            new SqlParameter("@remarks", SqlDbType.VarChar, 100),
+            new SqlParameter("@por", SqlDbType.Int, 4),
+            new SqlParameter("@fd", SqlDbType.Int, 4),
+            new SqlParameter("@rateid", SqlDbType.Int, 4)
+            };
+            array[0].Value = intLiner;
+            array[1].Value = intCargo;
+            array[2].Value = intPOL;
+            array[3].Value = intPOD;
+            array[4].Value = freight;
+            array[5].Value = validtill;
+            array[6].Value = shipment;
+            array[7].Value = dgcargo;
+            array[8].Value = bulkvolume;
+            array[9].Value = brokerage;
+            array[10].Value = intObtainby;
+            array[11].Value = intPrepareby;
+            array[12].Value = remarks;
+            array[13].Value = intPor;
+            array[14].Value = intFD;
+            array[15].Direction = ParameterDirection.Output;
+            IDataParameter[] parameters = array;
+            return ExecuteQuery("SPInsBuyingHead", parameters, "@rateid");
         }
 
         public void InsBuyingDetails(int intRateid, int intChargeid, string currency, double Rate, string Base)

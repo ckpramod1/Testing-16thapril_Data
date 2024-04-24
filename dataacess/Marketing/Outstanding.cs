@@ -81,7 +81,40 @@ namespace DataAccess.Marketing
         }
 
 
-       
+
+        public DataTable OutStdageingNewOnlineFormatnewfordate_USD(int empid, int divisionid, int bid, int subgroupid, string dbname, int customerid, int zero, DateTime dte)
+        {
+            SqlParameter[] objp = new SqlParameter[] {new SqlParameter("@empid", SqlDbType.Int),
+                                           new SqlParameter("@divisionid",SqlDbType.Int),
+         new SqlParameter("@branchid",SqlDbType.Int),
+         new SqlParameter("@subgroupid",SqlDbType.Int),
+         new SqlParameter("@dbname",SqlDbType.VarChar,15),
+         new SqlParameter("@customerid",SqlDbType.VarChar,15),
+         new SqlParameter("@zerobalance",SqlDbType.Int),
+                                               new SqlParameter("@to",SqlDbType.DateTime)
+                                           };
+
+            objp[0].Value = empid;
+            objp[1].Value = divisionid;
+            objp[2].Value = bid;
+            objp[3].Value = subgroupid;
+            objp[4].Value = dbname;
+            objp[5].Value = customerid;
+            objp[6].Value = zero;
+            objp[7].Value = dte;
+            if (subgroupid == 0)
+            {
+                return ExecuteTable("SPOutstdAgeingcurrrajOSAll", objp);
+            }
+            else
+            {
+                return ExecuteTable("SPOutstdAgeingcurrrajOSUSD", objp);
+            }
+
+        }
+
+
+
     }
 
 }
